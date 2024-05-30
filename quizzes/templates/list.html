@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Quiz List
+{% endblock %}
+
+{% block content %}
+    <div class="card" id="quiz-card">
+        <div id="container">
+            <h3>{{ question.question_text }}</h3>
+                <form action="{% url 'quiz:quiz_post' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label>
+                        <input type="radio" onclick="checkAnswer()" name="answer" value="True"> True
+                    </label>
+                    <label>
+                        <input type="radio" onclick="checkAnswer()"  name="answer" value="False"> False
+                    </label>
+                    <input type="hidden" id="selected_answer" name="selected_answer" value="">
+                    <div id="feedback" style="display: none; margin-top: 10px;"></div>
+
+                    <button type="submit">Submit</button>
+                </form>
+
+            <div id="feedback" style="display: none; margin-top: 10px;"></div>
+        </div>
+
+        <script>
+            var correctAnswer = "{{ question.correct_answer|safe }}";
+            console.log(typeof(correctAnswer))
+            function checkAnswer() {
+            const radios = document.getElementsByName('answer');
+            let selectedValue;
+            for (const radio of radios) {
+                if (radio.checked) {
+                    selectedValue = radio.value;
+                    break;
+                }
+            }
+            // Display feedback and lock the radio buttons
+            if (selectedValue === correctAnswer) {
+                            document.getElementById('feedback').innerText = 'Correct';
+                        } else {
+                            document.getElementById('feedback').innerText = 'Incorrect';
+                        }
+
+                        // Lock the radio buttons
+                        for (const radio of radios) {
+                            radio.disabled = true;
+                        }
+                        document.getElementById('selected_answer').value = selectedValue;
+
+                        // Show feedback message
+                        document.getElementById('feedback').style.display = 'block';
+                    }
+        </script>
+
+{% endblock %}

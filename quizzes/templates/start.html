@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Quiz List
+{% endblock %}
+
+{% block content %}
+<head>
+    <title>Quiz Time!</title>
+    <style>
+
+    </style>
+</head>
+
+    <div class="container">
+        <h1>Welcome to the Quiz!</h1>
+        <div class="card">
+            <p>Do you want to start the quiz?</p>
+            <button id="startButton"><a href="{% url 'quiz:quiz_get' %}">Quizzes</a></button>
+        </div>
+    </div>
+
+{% endblock %}
