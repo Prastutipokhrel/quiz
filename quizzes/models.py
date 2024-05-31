@@ -15,22 +15,23 @@ class Question(models.Model):
         related_name='quiz_questions',
     )
 
-class EquationQuestion(models.Model):
-    parameter1 = models.IntegerField()
-    parameter2 = models.IntegerField()
-    parameter3 = models.IntegerField()
-    correct_answer = models.FloatField()
-    question_text = models.CharField(max_length=500)
+class Equation(models.Model):
+    coefficient = models.IntegerField()
+    constant = models.IntegerField()
+    solution = models.IntegerField()
 
-    @staticmethod
+    @classmethod
     def generate_equation():
-        p1 = random.randint(-10, 10)
-        p2 = random.randint(-10, 10)
-        p3 = random.randint(-10, 10)
-        question_text = f"{p1} * x + {p2} = {p3}"
-        correct_answer = (p3 - p2) / p1
-        return EquationQuestion(parameter1=p1, 
-        parameter2=p2, 
-        parameter3=p3,
-        question_text=question_text,
-        correct_answer=correct_answer)
+        coefficient = random.randint(-10, 10)
+        while coefficient == 0:  # Ensuring coefficient is not zero
+            coefficient = random.randint(-10, 10)
+        constant = random.randint(-10, 10)
+        solution = random.randint(-10, 10)
+        return {
+            'coefficient': coefficient,
+            'constant': constant,
+            'solution': solution
+        }
+
+    def __str__(self):
+        return f"{self.coefficient}*x + {self.constant} = {self.solution + self.constant}"

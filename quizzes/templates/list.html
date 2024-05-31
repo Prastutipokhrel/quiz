@@ -5,31 +5,51 @@ Quiz List
 {% endblock %}
 
 {% block content %}
-    <div class="card" id="quiz-card">
-        <div id="container">
+<div class="card" id="quiz-card">
+    <div id="container">
+        {% if question_type == 'true_false' %}
             <h3>{{ question.question_text }}</h3>
-                <form action="{% url 'quiz:quiz_post' %}" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <label>
-                        <input type="radio" onclick="checkAnswer()" name="answer" value="True"> True
-                    </label>
-                    <label>
-                        <input type="radio" onclick="checkAnswer()"  name="answer" value="False"> False
-                    </label>
-                    <input type="hidden" id="selected_answer" name="selected_answer" value="">
-                    <div id="feedback" style="display: none; margin-top: 10px;"></div>
+            <form id="quiz-form" action="{% url 'quiz:quiz_post' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label>
+                    <input type="radio" name="answer" value="True"> True
+                </label>
+                <label>
+                    <input type="radio" name="answer" value="False"> False
+                </label>
+                <input type="hidden" id="selected_answer" name="selected_answer" value="">
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
+        {% elif question_type == 'equation' %}
+            <h3>Solve the equation: {{ equation }}</h3>
+            <form id="quiz-form" action="{% url 'quiz:quiz_post' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="answer">x = </label>
+                <input type="number" id="answer" name="answer" required>
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
+        {% endif %}
+        
+        {% if feedback %}
+            <div id="feedback" style="margin-top: 10px;">
+                {{ feedback }}
+            </div>
+        {% endif %}
+        
+        {% if show_next %}
+            <form action="{% url 'quiz:next_question' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Next</button>
+            </form>
+        {% endif %}
+    </div>
 
-                    <button type="submit">Submit</button>
-                </form>
-
-            <div id="feedback" style="display: none; margin-top: 10px;"></div>
-        </div>
-
-        <script>
-            var correctAnswer = "{{ question.correct_answer|safe }}";
-            console.log(typeof(correctAnswer))
-            function checkAnswer() {
+    <script>
+        var correctAnswer = "{{ question.correct_answer|safe }}";
+        console.log(correctAnswer)
+        function checkAnswer() {
             const radios = document.getElementsByName('answer');
+            console.log(radios)
             let selectedValue;
             for (const radio of radios) {
                 if (radio.checked) {
@@ -37,22 +57,28 @@ Quiz List
                     break;
                 }
             }
-            // Display feedback and lock the radio buttons
             if (selectedValue === correctAnswer) {
-                            document.getElementById('feedback').innerText = 'Correct';
-                        } else {
-                            document.getElementById('feedback').innerText = 'Incorrect';
-                        }
+                document.getElementById('feedback').innerText = 'Correct';
+            } else {
+                document.getElementById('feedback').innerText = 'Incorrect';
+            }
+            for (const radio of radios) {
+                radio.disabled = true;
+            }
+            document.getElementById('selected_answer').value = selectedValue;
+            document.getElementById('feedback').style.display = 'block';
+        }
 
-                        // Lock the radio buttons
-                        for (const radio of radios) {
-                            radio.disabled = true;
-                        }
-                        document.getElementById('selected_answer').value = selectedValue;
-
-                        // Show feedback message
-                        document.getElementById('feedback').style.display = 'block';
-                    }
-        </script>
+        document.getElementById('quiz-form').addEventListener('submit', function(event) {
+            if (document.getElementById('feedback').style.display !== 'block') {
+                event.preventDefault();
+                const selectedAnswerElement = document.querySelector('input[name="answer"]:checked');
+                if (selectedAnswerElement) {
+                    document.getElementById('selected_answer').value = selectedAnswerElement.value;
+                    document.getElementById('submit-button').disabled = true;
+                }
+            }
+        });
+    </script>
 
 {% endblock %}
