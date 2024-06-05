@@ -5,19 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53af84cf-5bfb-45b5-98ed-b3484d7ff27f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/quiz.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quiz/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quiz/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quiz/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quiz/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quiz/wsgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quizzes/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/quizzes/templates/quiz/quiz_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/quizzes/templates/user/editor/problem_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/quizzes/templates/user/editor/quiz_confirm_delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/quizzes/templates/user/editor/quiz_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quiz/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/quiz/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzes/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzes/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzes/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzes/templates/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/templates/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzes/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzes/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzes/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,23 +44,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Django Server.quiz.executor": "Run",
-    "Python.python manage.py migrate.executor": "Run",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django Server.quiz.executor&quot;: &quot;Run&quot;,
+    &quot;Python.python manage.py migrate.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\prast\PycharmProjects\quiz\quizzes\templates\user\editor" />
+    </key>
+  </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="python manage.py migrate  " />
@@ -143,20 +148,29 @@
       <workItem from="1716607672308" duration="6283000" />
       <workItem from="1716701859826" duration="2026000" />
       <workItem from="1716837717835" duration="5515000" />
+      <workItem from="1717177571214" duration="3560000" />
+      <workItem from="1717527871348" duration="2099000" />
+      <workItem from="1717538228919" duration="10117000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/quizzes/models.py</url>
-          <line>18</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/quiz/urls.py</url>
           <line>19</line>
@@ -166,6 +180,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/quiz$python_manage_py_migrate.coverage" NAME="python manage.py migrate Coverage Results" MODIFIED="1716604617728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/quiz$python_manage_py_migrate.coverage" NAME="python manage.py migrate Coverage Results" MODIFIED="1717570844591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

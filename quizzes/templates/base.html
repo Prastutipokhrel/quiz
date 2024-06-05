@@ -3,17 +3,28 @@
 <html>
 <head>
     <title>{% block title %}Quiz Application{% endblock %}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static "css/quiz.css" %}" rel="stylesheet">
 </head>
 <body>
-  <nav class="navbar">
-    <div class="navbar-brand">Quiz Application</div>
-        <ul class="navbar-links">
-            <li><a href="{% url 'quiz:home' %}">Home</a></li>
-            <li><a href="{% url 'quiz:quiz_get' %}">Quizzes</a></li>
-        </ul>
-    </div>
-  </nav>
+    <nav class="navbar">
+        <div class="navbar-brand">Quiz Application</div>
+            <ul class="navbar-links">
+                <li><a href="{% url 'quiz:home' %}">Home</a></li>
+                <li><a href="{% url 'quiz:quiz_get' %}">Quizzes</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="#">Welcome, {{ user.username }}</a></li>
+                    <li>
+                        <form action="{% url 'quiz:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
+                {% else %}
+                    <li><a href="{% url 'quiz:login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
     <div id="content">
         {% block content %}
         {% endblock %}
@@ -22,5 +33,7 @@
         <p>&copy; 2024 Quiz Application. All rights reserved.</p>
     </div>
 </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>
-

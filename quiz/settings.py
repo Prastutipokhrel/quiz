@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'quiz_system',
         'USER': 'postgres',
-        'PASSWORD': '',
+        'PASSWORD': 'lamar',
         'HOST': 'localhost',
         'PORT': '5432'
     }
@@ -134,3 +134,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'quiz:login'
+LOGIN_REDIRECT_URL = 'quiz:home'
+LOGOUT_REDIRECT_URL = 'quiz:home'

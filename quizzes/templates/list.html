@@ -5,80 +5,99 @@ Quiz List
 {% endblock %}
 
 {% block content %}
-<div class="card" id="quiz-card">
-    <div id="container">
-        {% if question_type == 'true_false' %}
-            <h3>{{ question.question_text }}</h3>
-            <form id="quiz-form" action="{% url 'quiz:quiz_post' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <label>
-                    <input type="radio" name="answer" value="True"> True
-                </label>
-                <label>
-                    <input type="radio" name="answer" value="False"> False
-                </label>
-                <input type="hidden" id="selected_answer" name="selected_answer" value="">
-                <button type="submit" id="submit-button">Submit</button>
-            </form>
-        {% elif question_type == 'equation' %}
-            <h3>Solve the equation: {{ equation }}</h3>
-            <form id="quiz-form" action="{% url 'quiz:quiz_post' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <label for="answer">x = </label>
-                <input type="number" id="answer" name="answer" required>
-                <button type="submit" id="submit-button">Submit</button>
-            </form>
-        {% endif %}
-        
-        {% if feedback %}
-            <div id="feedback" style="margin-top: 10px;">
-                {{ feedback }}
-            </div>
-        {% endif %}
-        
-        {% if show_next %}
-            <form action="{% url 'quiz:next_question' %}" method="post">
-                {% csrf_token %}
-                <button type="submit">Next</button>
-            </form>
-        {% endif %}
+    <div class="card" id="quiz-card">
+        <div id="container">
+            <p style="font-weight: bold;"> Question {{question_number}}</p>
+            {% if question_type == 'true_false' %}
+                <h3>{{ question }}</h3>
+                <form action="{% url 'quiz:quiz_post' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label>
+                        <input type="radio" onclick="checkAnswer()" name="answer" value="True"> True
+                    </label>
+                    <label>
+                        <input type="radio" onclick="checkAnswer()" name="answer" value="False"> False
+                    </label>
+                    <input type="hidden" id="selected_answer" name="selected_answer" value="">
+                    <div id="feedback" style="display: none; margin-top: 10px;"></div>
+
+                    <button type="submit">Submit</button>
+                </form>
+            {% elif question_type == 'equation' %}
+                <h3>Solve the equation: {{ equation }}</h3>
+                <form id = "equation_form" action="{% url 'quiz:quiz_post' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="answer">x = </label>
+                    <input type="number" id="eq_answer"  name="eq_answer" required>
+                    <div id="feedback" style="display: none; margin-top: 10px;"></div>
+                    <input type="hidden" id="selected_answer" name="selected_answer" value="">
+                    <button type="button" id="check" onclick="replaceButton()">Check</button>
+                </form>
+            {% endif %}
+        </div>
+
+        <script>
+            var question_type = "{{ question_type|safe }}";
+            console.log(question_type)
+            var correctAnswer = "{{ correct_answer|safe }}";
+            console.log(correctAnswer)
+            if (question_type == 'true_false' ){
+                function checkAnswer() {
+                    const radios = document.getElementsByName('answer');
+                    let selectedValue;
+                    for (const radio of radios) {
+                        if (radio.checked) {
+                            selectedValue = radio.value;
+                            break;
+                        }
+                    }
+                    if (selectedValue === correctAnswer) {
+                        document.getElementById('feedback').innerText = 'Correct';
+                    } else {
+                        document.getElementById('feedback').innerText = 'Incorrect';
+                    }
+                    for (const radio of radios) {
+                        radio.disabled = true;
+                    }
+                    document.getElementById('selected_answer').value = selectedValue;
+                    document.getElementById('feedback').style.display = 'block';
+                }
+            }
+            else(question_type == 'equation')
+            {
+                function replaceButton() {
+                    // Disable and hide the existing button with id = check
+                    let ans = document.getElementById('eq_answer').value;
+                    console.log("user answer",ans)
+                    if (ans === correctAnswer) {
+                        document.getElementById('feedback').innerText = 'Correct';
+                    } else {
+                        document.getElementById('feedback').innerText = 'Incorrect';
+                    }
+                    var checkButton = document.getElementById('check');
+                    checkButton.disabled = true;
+                    checkButton.style.display = 'none';
+
+                    var answerInput = document.getElementById('eq_answer');
+                    answerInput.disabled = true;
+                    document.getElementById('feedback').style.display = 'block';
+                    document.getElementById('selected_answer').value = ans;
+                    // Create a new submit button
+                    var submitButton = document.createElement('button');
+                    submitButton.setAttribute('type', 'submit');
+                    submitButton.innerText = 'Submit';
+
+                    // Add event listener to submit button to submit the form
+                    submitButton.addEventListener('click', function(event) {
+                        // Submit the form with id = equation_form
+                        document.getElementById('equation_form').submit();
+                    });
+
+                    // Append the new submit button to the form
+                    var form = document.getElementById('equation_form');
+                    form.appendChild(submitButton);
+                }
+            }
+        </script>
     </div>
-
-    <script>
-        var correctAnswer = "{{ question.correct_answer|safe }}";
-        console.log(correctAnswer)
-        function checkAnswer() {
-            const radios = document.getElementsByName('answer');
-            console.log(radios)
-            let selectedValue;
-            for (const radio of radios) {
-                if (radio.checked) {
-                    selectedValue = radio.value;
-                    break;
-                }
-            }
-            if (selectedValue === correctAnswer) {
-                document.getElementById('feedback').innerText = 'Correct';
-            } else {
-                document.getElementById('feedback').innerText = 'Incorrect';
-            }
-            for (const radio of radios) {
-                radio.disabled = true;
-            }
-            document.getElementById('selected_answer').value = selectedValue;
-            document.getElementById('feedback').style.display = 'block';
-        }
-
-        document.getElementById('quiz-form').addEventListener('submit', function(event) {
-            if (document.getElementById('feedback').style.display !== 'block') {
-                event.preventDefault();
-                const selectedAnswerElement = document.querySelector('input[name="answer"]:checked');
-                if (selectedAnswerElement) {
-                    document.getElementById('selected_answer').value = selectedAnswerElement.value;
-                    document.getElementById('submit-button').disabled = true;
-                }
-            }
-        });
-    </script>
-
 {% endblock %}
