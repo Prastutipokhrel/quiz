@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Student Page
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome Student!</h1>
+    <div class="card">
+        <p>Do you want to start the quiz?</p>
+        <button id="startButton"><a href="{% url 'quiz:quiz_get' %}">Quizzes</a></button>
+    </div>
+</div>
+{% endblock %}
+
+

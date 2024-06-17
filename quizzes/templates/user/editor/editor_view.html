@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Editor View
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Categories</h2>
+    <a href="{% url 'quiz:manage_category' %}" class="btn btn-primary mb-3">Add New Category</a>
+
+    <div class="list-group">
+        {% for category in categories %}
+        <div class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{% url 'quiz:subcategory_view' category.id %}" class="text-decoration-none">
+                    <span>{{ category.name }}</span>
+                </a>
+                <div class="btn-group" role="group" aria-label="Category Actions">
+                    <form href="{% url 'quiz:manage_category' category.id %}" method="post" style="display:inline;" >
+                        <button type="submit" class="btn btn-warning btn-sm">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </a>
+                    <form action="{% url 'quiz:delete_category' category.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Bootstrap Icons CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+{% endblock %}

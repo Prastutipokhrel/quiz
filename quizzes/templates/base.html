@@ -4,6 +4,12 @@
 <head>
     <title>{% block title %}Quiz Application{% endblock %}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+
     <link href="{% static "css/quiz.css" %}" rel="stylesheet">
 </head>
 <body>
@@ -28,12 +34,38 @@
     <div id="content">
         {% block content %}
         {% endblock %}
+
     </div>
     <div id="footer">
         <p>&copy; 2024 Quiz Application. All rights reserved.</p>
     </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        MathJax.typeset();
+    });
+</script>
+
+
+
+  
+<!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.18/katex.min.css">
+
+<!-- KaTeX JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.18/katex.min.js"></script>
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript"  src="/static/vendors/handlebars.min-latest.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--CHECK THIS-->
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
+<script type="text/javascript" src="/static/js/script.js"></script>
+<script type="text/javascript" src="/static/js/remote.js"></script>
+<script type="text/javascript" src="/static/js/templating.js"></script>
+<script type="text/javascript" src="/static/popup.js"></script>
 </html>

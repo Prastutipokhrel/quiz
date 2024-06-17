@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Student Category
+{% endblock %}
+
+{% block content %}
+<!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.18/katex.min.css">
+
+<!-- KaTeX JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.18/katex.min.js"></script>
+
+{% if all_mastered %}
+<div class="container mt-5">
+    <p>All problems in this subcategory have been mastered. No more problems left.</p>
+    <a href="{% url 'quiz:home' %}" class="btn btn-primary">Return to Home</a>
+</div>
+{% else %}
+<div class="container mt-5">
+    {% if mastered %}
+    <div class="alert alert-success">
+        <p>Congratulations! You have mastered this problem.</p>
+    </div>
+    {% endif %}
+
+    {% if not mastered %}
+    <h2>Quiz Problem</h2>
+    <div id="quiz-content">
+        <h3>Is it True or False?</h3>
+
+        <p id="question-text"></p>
+        <p id="math_test"></p>
+
+        <form id="quiz-form" method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="answer">Your Answer</label>
+                <select class="form-control" id="answer" name="answer"  onchange="checkAnswer()" required >
+                    <option value="">Select an answer</option>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+                <input id="selected_answer" name="selected_answer" value="" hidden>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div id="result" class="mt-3" style="display: none;">
+        <h2>Result</h2>
+        <p id="result-text"></p>
+    </div>
+    {% endif %}
+
+    {% if correct_formula %}
+    <div class="mt-3">
+        <h2>Correct Formula</h2>
+        <p id="correct_formula"></p>
+    </div>
+    {% endif %}
+
+    {% if mastered or answer_checked %}
+    <form method="post" action="">
+        {% csrf_token %}
+        <input type="hidden" name="next_problem" value="true">
+        <button id="next-problem-btn" class="btn btn-primary mt-3">Move to Next Problem</button>
+    </form>
+    {% endif %}
+</div>
+{% endif %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mathTextRenderContainer = document.getElementById('math_test');
+    const questionText = '{{ question_text|escapejs }}';
+    if (questionText) {
+        mathTextRenderContainer.innerHTML = katex.renderToString(questionText);
+    } else {
+        console.error('No question text found');
+    }
+
+    const correctformulaRenderContainer = document.getElementById('correct_formula');
+    const correctFormula = '{{ correct_formula|escapejs }}';
+    if (correctFormula) {
+        correctformulaRenderContainer.innerHTML = katex.renderToString(correctFormula);
+    } else {
+        console.error('No correct formula text found');
+    }
+});
+
+function checkAnswer() {
+    const answerSelect = document.getElementById('answer');
+    const send_answer = document.getElementById('selected_answer');
+
+    const selectedAnswer = answerSelect.value;
+    const correctAnswer = '{{ correct_option|safe }}';
+    console.log(correctAnswer)
+    console.log(selectedAnswer)
+    const resultDiv = document.getElementById('result');
+    const resultText = document.getElementById('result-text');
+    if (!resultText) {
+        console.error('result-text element not found');
+        return;
+    }
+
+    if (!resultDiv) {
+        console.error('result element not found');
+        return;
+    }
+
+    if (selectedAnswer) {
+        if (selectedAnswer === correctAnswer) {
+            resultText.textContent = 'Your answer is correct!';
+            resultText.className = 'text-success';
+        } else {
+            resultText.textContent = 'Your answer is incorrect.';
+            resultText.className = 'text-danger';
+        }
+        answerSelect.disabled = true;
+        send_answer.value = selectedAnswer;
+        resultDiv.style.display = 'block';
+    } else {
+        resultDiv.style.display = 'none';
+    }
+}
+</script>
+
+{% endblock %}

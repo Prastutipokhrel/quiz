@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Subcategory Detail
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Subcategory: {{ subcategory.name }}</h2>
+    <a href="{% url 'quiz:add_problem' subcategory.id %}" class="btn btn-primary mb-3">Add New Problem</a>
+    <h3>Problems</h3>
+    <ul class="list-group">
+        {% for problem in problems %}
+            <li class="list-group-item">
+                <!-- Render the math_text field using KaTeX -->
+                <div id="math-text-{{ problem.id }}"></div>
+                <form action="{% url 'quiz:delete_problem' problem.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </li>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const mathTextRenderContainer = document.getElementById('math-text-{{ problem.id }}');
+                    const questionText = '{{ problem.question_text|escapejs }}';
+                    if (questionText) {
+                        mathTextRenderContainer.innerHTML = katex.renderToString(questionText);
+                    } else {
+                        console.error('No question text found');
+                    }
+                });
+            </script>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'quiz:editor_view' %}" class="btn btn-secondary">Back to Categories</a>
+
+</div>
+{% endblock %}

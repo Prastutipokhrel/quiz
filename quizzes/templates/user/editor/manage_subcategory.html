@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Manage Problems
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Add Sub Category for {{ category.name }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ subcategory_form.as_p }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+{% endblock %}

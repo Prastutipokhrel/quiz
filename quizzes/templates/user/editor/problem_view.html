@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Problems of {{ subcategory.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Problems of {{ subcategory.name }}</h2>
+    <a href="{% url 'quiz:manage_problem' subcategory.id %}" class="btn btn-primary mb-3">Add New Problem</a>
+
+    <ul class="list-group mb-5">
+        {% for problem in problems %}
+            <li class="list-group-item">
+                {{ problem.question_text }}
+                <a href="{% url 'quiz:manage_problem' subcategory.id %}" class="btn btn-sm btn-warning">Edit</a>
+                <form action="{% url 'quiz:delete_problem' problem.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'quiz:subcategory_view' subcategory.category.id %}" class="btn btn-secondary">Back to Subcategories</a>
+</div>
+{% endblock %}

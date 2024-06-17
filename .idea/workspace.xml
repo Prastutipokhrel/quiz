@@ -4,19 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53af84cf-5bfb-45b5-98ed-b3484d7ff27f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/quizzes/templates/quiz/quiz_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quizzes/templates/user/editor/problem_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quizzes/templates/user/editor/quiz_confirm_delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quizzes/templates/user/editor/quiz_form.html" afterDir="false" />
+    <list default="true" id="53af84cf-5bfb-45b5-98ed-b3484d7ff27f" name="Changes" comment="made changes to adjust with category/subcategory">
+      <change afterPath="$PROJECT_DIR$/quizzes/templates/user/subcategory_view/manage_category.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/quizzes/templates/user/subcategory_view/manage_subcategory.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/quizzes/templates/user/subcategory_view/subcategory_view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quiz/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/quiz/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quizzes/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzes/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quizzes/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quizzes/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quizzes/templates/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/templates/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzes/templates/user/editor/problem_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/templates/user/subcategory_view/problem_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzes/templates/user/editor/quiz_confirm_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/templates/user/subcategory_view/quiz_confirm_delete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzes/templates/user/editor/quiz_form.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/quizzes/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quizzes/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quizzes/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzes/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +34,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Prastutipokhrel"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:Prastutipokhrel/quiz",
+    "accountId": "b95edc4f-2749-414f-9f00-261cba0506e1"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -150,8 +161,17 @@
       <workItem from="1716837717835" duration="5515000" />
       <workItem from="1717177571214" duration="3560000" />
       <workItem from="1717527871348" duration="2099000" />
-      <workItem from="1717538228919" duration="10117000" />
+      <workItem from="1717538228919" duration="14316000" />
     </task>
+    <task id="LOCAL-00001" summary="made changes to adjust with category/subcategory">
+      <option name="closed" value="true" />
+      <created>1717571037463</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1717571037463</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,6 +187,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="made changes to adjust with category/subcategory" />
+    <option name="LAST_COMMIT_MESSAGE" value="made changes to adjust with category/subcategory" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

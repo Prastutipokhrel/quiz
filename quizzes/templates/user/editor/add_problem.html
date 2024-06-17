@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Manage Problem
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Manage Problem</h2>
+
+    <form method="post" enctype="multipart/form-data" id="problem-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="math-field">Type Math Here:</label>
+            <div id="math-field" class="math-field-container"></div>
+            <label for="question_text">Question Template</label>
+            {{ form.question_text }}
+        </div>
+        <div class="form-group">
+            <label for="correct_option">Correct Option</label>
+            {{ form.correct_option }}
+        </div>
+        <div class="form-group">
+            <label for="correct_formula">Correct Formula</label>
+            {{ form.correct_formula }}
+        </div>
+        <div class="form-group">
+            <label for="subcategory">Subcategory</label>
+            {{ form.subcategory }}
+        </div>
+        <button type="submit" class="btn btn-primary" name="action" value="done">Save and Done</button>
+        <button type="submit" class="btn btn-secondary" name="action" value="add_another">Save and Add Another</button>
+    </form>
+</div>
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/mathquill@0.10.1-a/build/mathquill.css'>
+
+<!-- Custom CSS for MathQuill container -->
+<style>
+    .math-field-container {
+        border: 1px solid #ced4da;
+        padding: 10px;
+        border-radius: 4px;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .math-field-container .mq-root-block {
+        width: 100%;
+    }
+</style>
+
+<!-- partial -->
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/mathquill@0.10.1-a/build/mathquill.min.js'></script>
+<script>
+    $(document).ready(function() {
+        var mathFieldSpan = document.getElementById('math-field');
+        var questionTextField = document.getElementById('{{ form.question_text.id_for_label }}');
+
+        var MQ = MathQuill.getInterface(2); // for backcompat
+        var mathField = MQ.MathField(mathFieldSpan, {
+            spaceBehavesLikeTab: true, // configurable
+            handlers: {
+                edit: function() { // useful event handlers
+                    var latexContent = mathField.latex(); // get LaTeX content
+                    questionTextField.value = latexContent; // set LaTeX content to question_text field
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

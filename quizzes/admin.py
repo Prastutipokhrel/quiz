@@ -1,44 +1,36 @@
+# admin.py
+
 from django.contrib import admin
 from .models import Category, SubCategory, Problem, Role, UserProfile
 
 
-# class SubCategoryInline(admin.TabularInline):
-#     model = SubCategory
-#     extra = 1
-#
-#
-# class ProblemInline(admin.TabularInline):
-#     model = Problem
-#     extra = 1
-#
-#
-# class CategoryAdmin(admin.ModelAdmin):
-#     list_display = ('name',)
-#     inlines = [SubCategoryInline]
-#
-#
-# class SubCategoryAdmin(admin.ModelAdmin):
-#     list_display = ('name', 'category')
-#     list_filter = ('category',)
-#     inlines = [ProblemInline]
-#
-#
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+
+
+@admin.register(SubCategory)
+class SubCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category')
+    list_filter = ('category',)
+    search_fields = ('name', 'category__name')
+
+
+@admin.register(Problem)
 class ProblemAdmin(admin.ModelAdmin):
-    list_display = ('question_text_template', 'correct_answer', 'subcategory')
+    list_display = ('question_text', 'correct_formula', 'subcategory')
     list_filter = ('subcategory',)
-#
-#
-# class RoleAdmin(admin.ModelAdmin):
-#     list_display = ('name',)
-#
-#
-# class UserProfileAdmin(admin.ModelAdmin):
-#     list_display = ('user', 'role')
-#     list_filter = ('role',)
+    search_fields = ('question_text', 'subcategory__name')
 
 
-admin.site.register(Category)
-admin.site.register(SubCategory)
-admin.site.register(Problem)
-admin.site.register(Role)
-admin.site.register(UserProfile)
+@admin.register(Role)
+class RoleAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'role')
+    list_filter = ('role',)
+    search_fields = ('user__username', 'role__name')
